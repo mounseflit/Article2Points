@@ -166,7 +166,7 @@ def fix_unicode(text):
 
 
 def main():
-    st.title("Transformez vos Articles en Résumés Clairs pour Le Matin ✨📝")
+    st.title("Résumez vos Articles en Points Clairs pour Le Matin ✨📝")
     
     # Create sidebar for settings
     st.sidebar.header("Settings")
@@ -177,14 +177,14 @@ def main():
     )
 
     slidenumber = st.sidebar.slider(
-        "Nombre des Points et Idées",
+        "Nombre Maximal des Points et Idées",
         min_value=2,
-        max_value=30,
+        max_value=20,
         value=6
     )
 
     wordnumber = st.sidebar.slider(
-        "Nombre des Mots par Point",
+        "Nombre Maximal des Mots par Point",
         min_value=10,
         max_value=50,
         value=20
