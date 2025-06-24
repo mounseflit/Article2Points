@@ -224,29 +224,17 @@ def main():
 
             
 
-            import logging
-
-            # Configure Streamlit logging (only once in your script)
-            logging.basicConfig(level=logging.DEBUG)
-
             with st.spinner("Génération du résumé..."):
                 llm_response = call_llm_api(article_text, slidenumber, wordnumber, language)
-                st.subheader("🔍 Réponse brute de l'API")
-                st.write(llm_response)  # Print raw API response
-            
                 Json = save_and_clean_json(llm_response, "summary.json")
-                st.subheader("📦 Résultat JSON nettoyé")
-                st.json(Json)  # Show structured JSON in Streamlit
-            
-                logging.debug("Réponse JSON après nettoyage : %s", Json)  # Log in console if needed
-            
-                if Json is not None and 'summary' in Json:
-                    st.success("Résumé généré avec succès !")
-                    for i, point in enumerate(Json['summary']):
-                        cleaned_point = fix_unicode(point)
-                        st.write(f"• {cleaned_point}")
-                else:
-                    st.warning("Aucun résumé n'a été généré ou la clé 'summary' est absente.")
+                st.success("Résumé généré avec succès !")
+
+            if Json is not None and 'summary' in Json:
+                for i, point in enumerate(Json['summary']):
+                    cleaned_point = fix_unicode(point)
+                    st.write(f"• {cleaned_point}")
+            else:
+                st.warning("Aucun résumé n'a été généré.")
 
 
     
