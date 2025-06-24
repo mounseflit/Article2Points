@@ -227,11 +227,13 @@ def main():
                 Json = save_and_clean_json(llm_response, "summary.json")
                 st.success("Résumé généré avec succès !")
 
-            if 'summary' in Json:
+            if Json is not None and 'summary' in Json:
                 for i, point in enumerate(Json['summary']):
                     cleaned_point = fix_unicode(point)
                     st.write(f"• {cleaned_point}")
+            else:
+                st.warning("Aucun résumé n'a été généré.")
 
-
+    
 if __name__ == "__main__":
     main()
